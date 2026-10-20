@@ -41,8 +41,9 @@ pipeline {
 
         stage('Verify Deployment') {
             steps {
+                echo 'Waiting for application to warm up...'
+                sleep time: 4, unit: 'SECONDS'
                 echo 'Verifying application response...'
-                bat "timeout /t 4 /nobreak >nul"
                 bat "curl -f -s http://localhost:%PORT%/health"
             }
         }
